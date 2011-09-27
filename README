@@ -1,8 +1,11 @@
 fan.tools 
-Small Tools to Development:
-cpf generator
-cpf validator
-cnpj generator
-cnpj validator
-gwt stub generator
 
+Small Tools to Development:
+    cpf generator
+    cpf validator
+    cnpj generator
+    cnpj validator
+    gwt stub generator
+
+To compile:
+  add war/lib/gwt-servlet.jar
