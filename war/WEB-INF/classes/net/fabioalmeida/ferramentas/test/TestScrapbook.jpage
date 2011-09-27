@@ -1,0 +1,16 @@
+'0' - 0 (int) 48
+'9' - 0(int) 57
+
+char[] aa = "1234".toCharArray();
+
+for(int i = 0; i < aa.length; i++) {
+	System.out.print(aa[i]);
+} 
+
+
+int a = 1;
+
+a += 2;(int) 3
+
+
+"1234567".substring(0,6)(java.lang.String) 123456

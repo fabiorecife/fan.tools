@@ -1,0 +1,7 @@
+<module>
+	<inherits name="com.google.gwt.user.User"/>
+	<inherits name="com.google.gwt.user.theme.standard.Standard"/>
+	<source path="client" />
+	<source path="util" />
+	<entry-point class="net.fabioalmeida.ferramentas.client.Ferramentas"/>
+</module>
