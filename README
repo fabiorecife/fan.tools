@@ -1,11 +1,12 @@
 fan.tools 
 
 Small Tools to Development:
-    cpf generator
-    cpf validator
+    cpf generator - OK
+    cpf validator - OK
     cnpj generator
     cnpj validator
     gwt stub generator
+    String reverse
 
 To compile:
   add war/lib/gwt-servlet.jar
