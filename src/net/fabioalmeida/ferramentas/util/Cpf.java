@@ -7,11 +7,17 @@ public class Cpf {
 
 	private String numero;
 	
+	public Cpf() {
+		completarComNumeroAleatorio();
+	}
+	
+	
 	public Cpf(String numero) {
 		this.numero = pegarApenasNumeros(numero);
 	}
 	
-	public boolean isCpf() {
+	public boolean valido() {
+		if (numero == null || numero.length() != 11) return false;
         return digitoVerificador() == calcularDigitoVerficador();
     }
 
@@ -31,10 +37,6 @@ public class Cpf {
 		return digitoVerificadorCalculado;
 	}
 
-
-
-
-
 	private static long[] addDigitoToArray(long[] digito, long novodigito) {
 		long[] result = new long[digito.length+1];
 		for (int i = 0; i < digito.length; i++) {
@@ -43,9 +45,6 @@ public class Cpf {
 		result[result.length-1] = novodigito;
 		return result;
 	}
-	
-	
-	
 
 
 	public static String pegarApenasNumeros(String string) {
@@ -79,6 +78,69 @@ public class Cpf {
 		}
 		
 		return result;
+	}
+
+	public void completarComNumeroAleatorio() {
+		StringBuffer numeroAleatorios = gerarNumerosAleatorios();
+        adicionarDigitosVerificadores(numeroAleatorios);
+		this.numero = numeroAleatorios.toString();
+		
+	}
+
+
+	private StringBuffer gerarNumerosAleatorios() {
+		StringBuffer numeroCpf = new StringBuffer (11);
+        int digito = 0;
+        int numeroLength = this.numero == null ? 0 : this.numero.length();
+        for (int i = numeroLength ; i < 9; i ++) {
+            digito = (int) ( Math.random() * 10);
+            numeroCpf.append(Integer.toString(digito));
+        }
+		return numeroCpf;
+	}
+
+
+	private void adicionarDigitosVerificadores(StringBuffer numeroCpf) {
+        this.numero = numeroCpf.toString();
+		long digitoVerificador = calcularDigitoVerficador();
+        if (digitoVerificador < 10) {
+        	numeroCpf.append("0" + Long.toString(digitoVerificador));
+        } else {
+        	numeroCpf.append(Long.toString(digitoVerificador));
+        }
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cpf other = (Cpf) obj;
+		if (numero == null) {
+			if (other.numero != null)
+				return false;
+		} else if (!numero.equals(other.numero))
+			return false;
+		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return numero;
 	}
 	
 	

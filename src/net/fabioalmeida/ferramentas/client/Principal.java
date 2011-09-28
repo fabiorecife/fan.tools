@@ -29,12 +29,15 @@ public class Principal extends Composite {
 	private VerticalPanel verticalPanel;
 	private Button btnGeradorCpf;
 	private AbsolutePanel panelGeradores;
-	private TextBox cpfParaValidar;
-	private Button btnNewButton;
+	private TextBox cpfParaValidarTextBox;
+	private Button validarCpfButton;
 	private Label lblNewLabel_1;
 	private AbsolutePanel absolutePanel_1;
 	private InlineHTML nlnhtmlNewInlinehtml;
 	private AbsolutePanel panelCentro;
+	private Button gerarCpfButton;
+	private TextBox cpfGeradoTextBox;
+	private Label respostaLabel;
 
 	public Principal() {
 		
@@ -95,31 +98,48 @@ public class Principal extends Composite {
 		panelGeradores.setStyleName("fan-dockPanel-principal");
 		deckPanel.add(panelGeradores);
 		
-		cpfParaValidar = new TextBox();
-		panelGeradores.add(cpfParaValidar, 133, 61);
+		cpfParaValidarTextBox = new TextBox();
+		panelGeradores.add(cpfParaValidarTextBox, 133, 61);
 		
-		btnNewButton = new Button("New button");
-		btnNewButton.addClickHandler(new ClickHandler() {
+		validarCpfButton = new Button("New button");
+		validarCpfButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				String scpf = cpfParaValidar.getText();
+				String scpf = cpfParaValidarTextBox.getText();
 				Cpf cpf = new Cpf(scpf);
-				boolean b = cpf.isCpf();
+				boolean b = cpf.valido();
 				if (b) {
-					Window.alert("cpf válido");
+					respostaLabel.setText("cpf válido");
 				} else {
-					Window.alert("cpf inválido");
+					respostaLabel.setText("cpf inválido");
 				}
 				
 			}
 		});
-		btnNewButton.setText("Validar CPF");
-		panelGeradores.add(btnNewButton, 28, 65);
+		validarCpfButton.setText("Validar CPF");
+		panelGeradores.add(validarCpfButton, 28, 65);
 		
 		lblNewLabel = new Label("CPF / CNPJ");
 		panelGeradores.add(lblNewLabel, 10, 10);
 		lblNewLabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
 		lblNewLabel.setStyleName("fan-label-titulo");
 		lblNewLabel.setSize("770px", "19px");
+		
+		gerarCpfButton = new Button("Gerar CPF");
+		gerarCpfButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				Cpf cpf = new Cpf();
+				cpfGeradoTextBox.setText(cpf.toString());
+			}
+		});
+		panelGeradores.add(gerarCpfButton, 28, 108);
+		gerarCpfButton.setSize("86px", "25px");
+		
+		cpfGeradoTextBox = new TextBox();
+		panelGeradores.add(cpfGeradoTextBox, 133, 106);
+		
+		respostaLabel = new Label(">                    ");
+		respostaLabel.setStyleName("fan-resposta-Label");
+		panelGeradores.add(respostaLabel, 319, 69);
 		deckPanel.showWidget(0);
 	}
 }

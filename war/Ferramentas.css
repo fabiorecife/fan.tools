@@ -341,3 +341,13 @@ a:visited {
 	margin-left:auto;
 	margin-right:auto;
 }
+.fan-resposta-Label {
+	color: darkgreen;
+	font-stretch: normal;
+	font-variant: normal;
+	font-size: medium;
+	font-style: normal;
+	font-family: Monaco, Arial, serif;
+	font-weight: bold;
+	text-decoration: underline;
+}

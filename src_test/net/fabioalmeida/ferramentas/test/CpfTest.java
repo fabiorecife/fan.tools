@@ -14,19 +14,19 @@ public class CpfTest {
 	@Test
 	public void test_isCpf() {
 		Cpf cpf = new Cpf("98453147671");
-		assertTrue(cpf.isCpf());
+		assertTrue(cpf.valido());
 	}
 	
 	@Test
 	public void test_isCpf_com_zero() {
 		Cpf cpf = new Cpf("88557474520");
-		assertTrue(cpf.isCpf());
+		assertTrue(cpf.valido());
 	}
 
 	@Test
 	public void test_isCpf_cpf_falso() {
 		Cpf cpf = new Cpf("88557474521");
-		assertFalse(cpf.isCpf());
+		assertFalse(cpf.valido());
 	}
 
 	@Test
@@ -54,6 +54,18 @@ public class CpfTest {
 	public void test_digitoVerificador() {
 		Cpf cpf = new Cpf("00000000000");
 		assertEquals("pegou os numeros errados", 0L,cpf.digitoVerificador());
+	}
+	
+	@Test
+	public void test_gerarCPF() {
+		Cpf cpf = new Cpf();
+		assertTrue(cpf.valido());
+	}
+	
+	@Test
+	public void test_cpfNumeroVazio() {
+		Cpf cpf = new Cpf("");
+		assertFalse(cpf.valido());
 	}
 	
 	
