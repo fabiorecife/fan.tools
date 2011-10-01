@@ -1,5 +1,6 @@
 package net.fabioalmeida.ferramentas.client;
 
+
 import net.fabioalmeida.ferramentas.util.Cpf;
 
 import com.google.gwt.user.client.Window;

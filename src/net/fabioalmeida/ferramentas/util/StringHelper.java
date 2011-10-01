@@ -6,9 +6,13 @@ public class StringHelper {
 		StringBuilder build = new StringBuilder(11);
 		char[] c = string.toCharArray();
 		for (int i = 0; i < c.length; i++ ) {
-			if (c[i] >= 48 && c[i] <= 57) build.append(c[i]);
+			if (Character.isDigit(c[i])) build.append(c[i]);
 		}
 		return build.toString();
+	}
+
+	public static String formatarNumeroComZerosAEsquerda(long numero, int size) {
+		return String.format("%0"+size+"d", numero);
 	}
 
 }

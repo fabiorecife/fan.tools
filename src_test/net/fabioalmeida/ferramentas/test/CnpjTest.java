@@ -1,9 +1,11 @@
 package net.fabioalmeida.ferramentas.test;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import net.fabioalmeida.ferramentas.util.ArrayHelper;
 import net.fabioalmeida.ferramentas.util.Cnpj;
+import net.fabioalmeida.ferramentas.util.Modulo11;
 
 import org.junit.Test;
 
@@ -38,27 +40,27 @@ public class CnpjTest {
 	
 	@Test
 	public void test_modulo11_vetor_1_base_2_9() {
-		Cnpj cnpj = new Cnpj("0000000000000");
-		assertEquals(9, ArrayHelper.modulo11(new long[]{1},2,9) );
+		Modulo11 modulo11= new Modulo11(2,9);
+		assertEquals(9, modulo11.calcular(new long[]{1}) );
 	}
 
 	@Test
 	public void test_modulo11_vetor_11_base_2_9() {
-		Cnpj cnpj = new Cnpj("0000000000000");
-		assertEquals(6, ArrayHelper.modulo11(new long[]{1,1},2,9) );
+		Modulo11 modulo11= new Modulo11(2,9);
+		assertEquals(6, modulo11.calcular(new long[]{1,1}) );
 	}
 	
 
 	@Test
 	public void test_modulo11_vetor_111_base_2_9() {
-		Cnpj cnpj = new Cnpj("0000000000000");
-		assertEquals(2, ArrayHelper.modulo11(new long[]{1,1,1},2,9) );
+		Modulo11 modulo11= new Modulo11(2,9);
+		assertEquals(2, modulo11.calcular(new long[]{1,1,1}) );
 	}
 	
 	@Test
 	public void test_modulo11_vetor_1110_base_2_9() {
-		Cnpj cnpj = new Cnpj("0000000000000");
-		assertEquals(0, ArrayHelper.modulo11(new long[]{1,1,1,0},2,9) );
+		Modulo11 modulo11= new Modulo11(2,9);
+		assertEquals(0, modulo11.calcular(new long[]{1,1,1,0}) );
 	}
 	
 	

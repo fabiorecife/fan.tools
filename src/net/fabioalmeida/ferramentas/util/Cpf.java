@@ -1,56 +1,31 @@
 package net.fabioalmeida.ferramentas.util;
 
-import java.util.Random;
 
 
-public class Cpf {
+public class Cpf  {
 
 	private String numero;
-	
-	public Cpf() {
-		completarComNumeroAleatorio();
-	}
+	private Modulo11 modulo11;
+	private DigitoVerificador digitoVerificador;
 	
 	public Cpf(String numero) {
+		modulo11 = new Modulo11(2,11);
+		digitoVerificador = new DigitoVerificador(2,modulo11);
 		this.numero = StringHelper.pegarApenasNumeros(numero);
 	}
 	
-	public boolean valido() {
-        return digitoVerificador() == calcularDigitoVerficador();
-    }
-
-	public long digitoVerificador() {
-		return Long.parseLong(this.numero) % 100;
-	}
-
-	public long calcularDigitoVerficador() {
-        long deslocamentoDoDigito = 10L;
-		long[] digitos = ArrayHelper.stringParaArrayLong(numero.substring(0,9));
-		long primeiroDigito = ArrayHelper.modulo11(digitos, 2, 11);
-        digitos = ArrayHelper.adicionarDigitoParaArray(digitos, ArrayHelper.modulo11(digitos, 2, 11));
-        long segundoDigito = ArrayHelper.modulo11(digitos, 2, 11);
-		return (primeiroDigito*deslocamentoDoDigito)+segundoDigito;
+	public Cpf() {
+		modulo11 = new Modulo11(2,11);
+		digitoVerificador = new DigitoVerificador(2,modulo11);
+		completarComNumeroAleatorio();
 	}
 	
 	public void completarComNumeroAleatorio() {
-		StringBuffer numeroAleatorios = gerarNumerosAleatorios();
+		GeradorNumeros gerador = new GeradorNumeros();
+		StringBuffer numeroAleatorios = new StringBuffer(gerador.criarNumero(9));
         adicionarDigitosVerificadores(numeroAleatorios);
 		this.numero = numeroAleatorios.toString();
-		
 	}
-
-
-	private StringBuffer gerarNumerosAleatorios() {
-		StringBuffer numeroCpf = new StringBuffer (11);
-        int digito = 0;
-        int numeroLength = this.numero == null ? 0 : this.numero.length();
-        for (int i = numeroLength ; i < 9; i ++) {
-            digito = (int) ( Math.random() * 10);
-            numeroCpf.append(Integer.toString(digito));
-        }
-		return numeroCpf;
-	}
-
 
 	private void adicionarDigitosVerificadores(StringBuffer numeroCpf) {
         this.numero = numeroCpf.toString();
@@ -61,7 +36,34 @@ public class Cpf {
         	numeroCpf.append(Long.toString(digitoVerificador));
         }
 	}
+	
+	public boolean valido() {
+		if (this.numero == null || this.numero.length() != 11) return false;
+        return getDigitoVerificador() == digitoVerificador.calcular(getNumeroSemDigito());
+    }
 
+	private long[] getNumeroSemDigito() {
+		return ArrayHelper.stringParaLongArray(numero.substring(0, 9));
+	}
+
+	
+	public long getDigitoVerificador() {
+		return Long.parseLong(this.numero) % 100;
+	}
+
+	
+	public long calcularDigitoVerficador() {
+		long[] digitos = getNumeroSemDigito();
+		long primeiroDigito = modulo11.calcular(digitos);
+        digitos = ArrayHelper.adicionarDigitoParaArray(digitos, primeiroDigito);
+        long segundoDigito = modulo11.calcular(digitos);
+		return concatenarDigitos(primeiroDigito, segundoDigito);
+	}
+
+	private long concatenarDigitos(long primeiroDigito, long segundoDigito) {
+		long deslocamentoDoDigito = 10L;
+		return (primeiroDigito*deslocamentoDoDigito)+segundoDigito;
+	}
 
 	@Override
 	public int hashCode() {
