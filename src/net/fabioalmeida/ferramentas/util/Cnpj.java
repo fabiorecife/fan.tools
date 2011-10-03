@@ -1,6 +1,5 @@
 package net.fabioalmeida.ferramentas.util;
 
-import java.io.Serializable;
 
 public class Cnpj  {
 

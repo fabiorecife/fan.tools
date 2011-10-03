@@ -5,13 +5,13 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ 
+@SuiteClasses({
+		ArrayHelperTest.class,
 		CnpjTest.class, 
-		CpfTest.class, 
+		CpfTest.class,
+		DigitoVerificadorTest.class,
 		GeradorNumerosTest.class,
 		Modulo11Test.class, 
-		NumeroCadastroTest.class,
-		DigitoVerificadorTest.class,
 		StringHelperTest.class
 })
 public class AllTests {

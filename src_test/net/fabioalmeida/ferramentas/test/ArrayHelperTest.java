@@ -9,7 +9,7 @@ import net.fabioalmeida.ferramentas.util.ArrayHelper;
 public class ArrayHelperTest {
 
 	@Test
-	public void test() {
+	public void test_stringParaLongArray() {
 		long[] digitos = ArrayHelper.stringParaLongArray("0123456789");
 		compararArray0_9(digitos);
 	}

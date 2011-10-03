@@ -1,12 +1,8 @@
 package net.fabioalmeida.ferramentas.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import net.fabioalmeida.ferramentas.util.ArrayHelper;
 import net.fabioalmeida.ferramentas.util.Cpf;
-import net.fabioalmeida.ferramentas.util.Modulo11;
-import net.fabioalmeida.ferramentas.util.StringHelper;
 
 import org.junit.Test;
 
