@@ -53,7 +53,7 @@ public class CnpjTest {
 	@Test
 	public void test_cnpj_construtor_default() {
 		Cnpj cnpj = new Cnpj();
-		assertEquals(14, cnpj.getNumero().length());
+		assertEquals(14, cnpj.toString().length());
 		assertTrue(cnpj.valido());
 	}
 	

@@ -1,5 +1,8 @@
 package net.fabioalmeida.ferramentas.util;
 
+import com.google.gwt.regexp.shared.RegExp;
+import com.google.gwt.regexp.shared.SplitResult;
+
 public class StringHelper {
 
 	public static String pegarApenasNumeros(String string) {
@@ -12,7 +15,13 @@ public class StringHelper {
 	}
 
 	public static String formatarNumeroComZerosAEsquerda(long numero, int size) {
-		return String.format("%0"+size+"d", numero);
+		String result = String.valueOf(numero);
+		while (result.length() < size) {
+			result = "0" + result;
+		}
+		return result;
 	}
 
+	
+	
 }

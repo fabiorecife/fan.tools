@@ -1,24 +1,22 @@
 package net.fabioalmeida.ferramentas.client;
 
 
+import net.fabioalmeida.ferramentas.util.Cnpj;
 import net.fabioalmeida.ferramentas.util.Cpf;
 
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DecoratorPanel;
-import com.google.gwt.user.client.ui.DockPanel;
-import com.google.gwt.user.client.ui.StackPanel;
-import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.DeckPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.Hyperlink;
-import com.google.gwt.user.client.ui.InlineHTML;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DeckPanel;
+import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.InlineHTML;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.StackPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Principal extends Composite {
 	private Label lblNewLabel;
@@ -28,7 +26,7 @@ public class Principal extends Composite {
 	private DeckPanel deckPanel;
 	private StackPanel stackPanel;
 	private VerticalPanel verticalPanel;
-	private Button btnGeradorCpf;
+	private Button geraCpfButton;
 	private AbsolutePanel panelGeradores;
 	private TextBox cpfParaValidarTextBox;
 	private Button validarCpfButton;
@@ -38,7 +36,12 @@ public class Principal extends Composite {
 	private AbsolutePanel panelCentro;
 	private Button gerarCpfButton;
 	private TextBox cpfGeradoTextBox;
-	private Label respostaLabel;
+	private Label respostaCpfLabel;
+	private Button validarCnpjButton;
+	private Button gerarCnpjButton;
+	private TextBox cnpjValidarTextBox;
+	private Label respostaCnpjLabel;
+	private TextBox cnpjGeradoTextBox;
 
 	public Principal() {
 		
@@ -80,11 +83,11 @@ public class Principal extends Composite {
 		stackPanel.add(verticalPanel, "Ferramentas", false);
 		verticalPanel.setSize("100%", "100%");
 		
-		btnGeradorCpf = new Button("Gerador CPF");
-		btnGeradorCpf.setText("CPF / CNPJ");
-		verticalPanel.add(btnGeradorCpf);
-		btnGeradorCpf.setWidth("100%");
-		verticalPanel.setCellHorizontalAlignment(btnGeradorCpf, HasHorizontalAlignment.ALIGN_CENTER);
+		geraCpfButton = new Button("Gerador CPF");
+		geraCpfButton.setText("CPF / CNPJ");
+		verticalPanel.add(geraCpfButton);
+		geraCpfButton.setWidth("100%");
+		verticalPanel.setCellHorizontalAlignment(geraCpfButton, HasHorizontalAlignment.ALIGN_CENTER);
 		
 		panelCentro = new AbsolutePanel();
 		dockPanel.add(panelCentro, DockPanel.CENTER);
@@ -109,15 +112,16 @@ public class Principal extends Composite {
 				Cpf cpf = new Cpf(scpf);
 				boolean b = cpf.valido();
 				if (b) {
-					respostaLabel.setText("cpf válido");
+					respostaCpfLabel.setText("cpf válido");
 				} else {
-					respostaLabel.setText("cpf inválido");
+					respostaCpfLabel.setText("cpf inválido");
 				}
 				
 			}
 		});
 		validarCpfButton.setText("Validar CPF");
 		panelGeradores.add(validarCpfButton, 28, 65);
+		validarCpfButton.setSize("93px", "25px");
 		
 		lblNewLabel = new Label("CPF / CNPJ");
 		panelGeradores.add(lblNewLabel, 10, 10);
@@ -133,14 +137,51 @@ public class Principal extends Composite {
 			}
 		});
 		panelGeradores.add(gerarCpfButton, 28, 108);
-		gerarCpfButton.setSize("86px", "25px");
+		gerarCpfButton.setSize("93px", "25px");
 		
 		cpfGeradoTextBox = new TextBox();
 		panelGeradores.add(cpfGeradoTextBox, 133, 106);
 		
-		respostaLabel = new Label(">                    ");
-		respostaLabel.setStyleName("fan-resposta-Label");
-		panelGeradores.add(respostaLabel, 319, 69);
+		respostaCpfLabel = new Label(">                    ");
+		respostaCpfLabel.setStyleName("fan-resposta-Label");
+		panelGeradores.add(respostaCpfLabel, 319, 69);
+		
+		validarCnpjButton = new Button("Validar CNPJ");
+		validarCnpjButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				String scnpj = cnpjValidarTextBox.getText();
+				Cnpj cnpj = new Cnpj(scnpj);
+				boolean b = cnpj.valido();
+				if (b) {
+					respostaCnpjLabel.setText("cnpj válido");
+				} else {
+					respostaCnpjLabel.setText("cnpj inválido");
+				}
+				
+			}
+		});
+		panelGeradores.add(validarCnpjButton, 28, 167);
+		
+		gerarCnpjButton = new Button("Gerar CNPJ");
+		gerarCnpjButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				Cnpj cnpj = new Cnpj();
+				String scnpj = cnpj.toString();
+				cnpjGeradoTextBox.setText(scnpj);
+			}
+		});
+		panelGeradores.add(gerarCnpjButton, 28, 211);
+		gerarCnpjButton.setSize("93px", "25px");
+		
+		cnpjValidarTextBox = new TextBox();
+		panelGeradores.add(cnpjValidarTextBox, 133, 165);
+		
+		respostaCnpjLabel = new Label(">");
+		respostaCnpjLabel.setStyleName("fan-resposta-Label");
+		panelGeradores.add(respostaCnpjLabel, 319, 167);
+		
+		cnpjGeradoTextBox = new TextBox();
+		panelGeradores.add(cnpjGeradoTextBox, 133, 209);
 		deckPanel.showWidget(0);
 	}
 }

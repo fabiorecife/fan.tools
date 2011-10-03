@@ -18,8 +18,10 @@ public class StringHelperTest {
 	
 	@Test
 	public void test_formatarNumeroComZerosAEsquerda() {
+		assertEquals("7", StringHelper.formatarNumeroComZerosAEsquerda(7,1));
 		assertEquals("07", StringHelper.formatarNumeroComZerosAEsquerda(7,2));
 		assertEquals("007", StringHelper.formatarNumeroComZerosAEsquerda(7,3));
+		assertEquals("17", StringHelper.formatarNumeroComZerosAEsquerda(17,2));
 	}
 
 }

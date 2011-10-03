@@ -1,6 +1,6 @@
 '0' - 0 (int) 48
 '9' - 0(int) 57
-
+232757789560075
 char[] aa = "1234".toCharArray();
 
 for(int i = 0; i < aa.length; i++) {
