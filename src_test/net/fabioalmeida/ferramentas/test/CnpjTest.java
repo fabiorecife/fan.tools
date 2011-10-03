@@ -36,31 +36,27 @@ public class CnpjTest {
 		assertFalse(cnpj.valido());
 	}
 	
-	
-	
 	@Test
-	public void test_modulo11_vetor_1_base_2_9() {
-		Modulo11 modulo11= new Modulo11(2,9);
-		assertEquals(9, modulo11.calcular(new long[]{1}) );
-	}
-
-	@Test
-	public void test_modulo11_vetor_11_base_2_9() {
-		Modulo11 modulo11= new Modulo11(2,9);
-		assertEquals(6, modulo11.calcular(new long[]{1,1}) );
-	}
-	
-
-	@Test
-	public void test_modulo11_vetor_111_base_2_9() {
-		Modulo11 modulo11= new Modulo11(2,9);
-		assertEquals(2, modulo11.calcular(new long[]{1,1,1}) );
+	public void test_cnpj_getNumeroSemDigito() {
+		Cnpj cnpj = new Cnpj("12345678901234");
+		long [] digitos = cnpj.getNumeroSemDigito();
+		assertEquals(12, digitos.length);
+		for (int i = 1; i < 10; i++) {
+			assertEquals(i,digitos[i-1]);	
+		}
 	}
 	
 	@Test
-	public void test_modulo11_vetor_1110_base_2_9() {
-		Modulo11 modulo11= new Modulo11(2,9);
-		assertEquals(0, modulo11.calcular(new long[]{1,1,1,0}) );
+	public void test_cnpj_getDigitoVerificador() {
+		Cnpj cnpj = new Cnpj("12345678901234");
+		assertEquals(34, cnpj.getDigitoVerificador());
+	}
+	
+	@Test
+	public void test_cnpj_construtor_default() {
+		Cnpj cnpj = new Cnpj();
+		assertEquals(14, cnpj.getNumero().length());
+		assertTrue(cnpj.valido());
 	}
 	
 	

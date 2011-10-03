@@ -11,7 +11,6 @@ import net.fabioalmeida.ferramentas.util.StringHelper;
 import org.junit.Test;
 
 public class CpfTest {
-
 	
 	@Test
 	public void test_isCpf() {
@@ -25,28 +24,6 @@ public class CpfTest {
 		assertTrue(cpf.valido());
 	}
 
-	@Test
-	public void test_isCpf_cpf_falso() {
-		Cpf cpf = new Cpf("88557474521");
-		assertFalse(cpf.valido());
-	}
-
-	@Test
-	public void test_calculoDigitoVerificador() {
-		Cpf cpf = new Cpf("88557474520");
-		assertEquals("digito verificador calculado errado", 20L, cpf.calcularDigitoVerficador());
-	}
-	
-	
-	
-	
-	@Test
-	public void test_modulo11_base_2_11() {
-		Modulo11 modulo11 = new Modulo11(2,11);
-		assertEquals("modulo11 calculado errado", 2, modulo11.calcular(new long[] {8,8,5,5,7,4,7,4,5}));
-		assertEquals("modulo11 calculado errado", 0, modulo11.calcular(new long[] {8,8,5,5,7,4,7,4,5,2}));
-	}
-	
 	@Test 
 	public void test_digitoVerificador() {
 		Cpf cpf = new Cpf("00000000000");

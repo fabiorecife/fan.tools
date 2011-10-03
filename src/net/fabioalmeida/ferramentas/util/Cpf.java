@@ -22,20 +22,10 @@ public class Cpf  {
 	
 	public void completarComNumeroAleatorio() {
 		GeradorNumeros gerador = new GeradorNumeros();
-		StringBuffer numeroAleatorios = new StringBuffer(gerador.criarNumero(9));
-        adicionarDigitosVerificadores(numeroAleatorios);
-		this.numero = numeroAleatorios.toString();
+		this.numero = gerador.criarNumero(9);
+		this.numero	+= StringHelper.formatarNumeroComZerosAEsquerda(digitoVerificador.calcular(getNumeroSemDigito()), 2);
 	}
 
-	private void adicionarDigitosVerificadores(StringBuffer numeroCpf) {
-        this.numero = numeroCpf.toString();
-		long digitoVerificador = calcularDigitoVerficador();
-        if (digitoVerificador < 10) {
-        	numeroCpf.append("0" + Long.toString(digitoVerificador));
-        } else {
-        	numeroCpf.append(Long.toString(digitoVerificador));
-        }
-	}
 	
 	public boolean valido() {
 		if (this.numero == null || this.numero.length() != 11) return false;
@@ -50,21 +40,8 @@ public class Cpf  {
 	public long getDigitoVerificador() {
 		return Long.parseLong(this.numero) % 100;
 	}
-
 	
-	public long calcularDigitoVerficador() {
-		long[] digitos = getNumeroSemDigito();
-		long primeiroDigito = modulo11.calcular(digitos);
-        digitos = ArrayHelper.adicionarDigitoParaArray(digitos, primeiroDigito);
-        long segundoDigito = modulo11.calcular(digitos);
-		return concatenarDigitos(primeiroDigito, segundoDigito);
-	}
-
-	private long concatenarDigitos(long primeiroDigito, long segundoDigito) {
-		long deslocamentoDoDigito = 10L;
-		return (primeiroDigito*deslocamentoDoDigito)+segundoDigito;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
