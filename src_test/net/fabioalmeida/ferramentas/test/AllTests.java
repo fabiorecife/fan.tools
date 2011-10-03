@@ -7,8 +7,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 		ArrayHelperTest.class,
-		CnpjTest.class, 
-		CpfTest.class,
+		NumeroCnpjTest.class, 
+		NumeroCpfTest.class,
 		DigitoVerificadorTest.class,
 		GeradorNumerosTest.class,
 		Modulo11Test.class, 
