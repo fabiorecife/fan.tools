@@ -5,8 +5,8 @@ License: GPLv3
 Small Tools:
     cpf generator - OK
     cpf validator - OK
-    cnpj generator
-    cnpj validator
+    cnpj generator - OK
+    cnpj validator - OK
     gwt stub generator
     String reverse
 

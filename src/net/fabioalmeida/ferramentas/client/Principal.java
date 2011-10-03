@@ -1,8 +1,8 @@
 package net.fabioalmeida.ferramentas.client;
 
 
-import net.fabioalmeida.ferramentas.util.Cnpj;
-import net.fabioalmeida.ferramentas.util.Cpf;
+import net.fabioalmeida.ferramentas.util.NumeroCnpj;
+import net.fabioalmeida.ferramentas.util.NumeroCpf;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -109,7 +109,7 @@ public class Principal extends Composite {
 		validarCpfButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				String scpf = cpfParaValidarTextBox.getText();
-				Cpf cpf = new Cpf(scpf);
+				NumeroCpf cpf = new NumeroCpf(scpf);
 				boolean b = cpf.valido();
 				if (b) {
 					respostaCpfLabel.setText("cpf válido");
@@ -132,7 +132,7 @@ public class Principal extends Composite {
 		gerarCpfButton = new Button("Gerar CPF");
 		gerarCpfButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				Cpf cpf = new Cpf();
+				NumeroCpf cpf = new NumeroCpf();
 				cpfGeradoTextBox.setText(cpf.toString());
 			}
 		});
@@ -150,7 +150,7 @@ public class Principal extends Composite {
 		validarCnpjButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				String scnpj = cnpjValidarTextBox.getText();
-				Cnpj cnpj = new Cnpj(scnpj);
+				NumeroCnpj cnpj = new NumeroCnpj(scnpj);
 				boolean b = cnpj.valido();
 				if (b) {
 					respostaCnpjLabel.setText("cnpj válido");
@@ -165,7 +165,7 @@ public class Principal extends Composite {
 		gerarCnpjButton = new Button("Gerar CNPJ");
 		gerarCnpjButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				Cnpj cnpj = new Cnpj();
+				NumeroCnpj cnpj = new NumeroCnpj();
 				String scnpj = cnpj.toString();
 				cnpjGeradoTextBox.setText(scnpj);
 			}

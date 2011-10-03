@@ -2,19 +2,19 @@ package net.fabioalmeida.ferramentas.util;
 
 
 
-public class Cpf  {
+public class NumeroCpf  {
 
 	private String numero;
 	private Modulo11 modulo11;
 	private DigitoVerificador digitoVerificador;
 	
-	public Cpf(String numero) {
+	public NumeroCpf(String numero) {
 		modulo11 = new Modulo11(2,11);
 		digitoVerificador = new DigitoVerificador(2,modulo11);
 		this.numero = StringHelper.pegarApenasNumeros(numero);
 	}
 	
-	public Cpf() {
+	public NumeroCpf() {
 		modulo11 = new Modulo11(2,11);
 		digitoVerificador = new DigitoVerificador(2,modulo11);
 		completarComNumeroAleatorio();
@@ -59,7 +59,7 @@ public class Cpf  {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cpf other = (Cpf) obj;
+		NumeroCpf other = (NumeroCpf) obj;
 		if (numero == null) {
 			if (other.numero != null)
 				return false;
