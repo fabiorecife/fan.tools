@@ -38,6 +38,17 @@ public class StringHelper {
 		return result;
 	}
 
+	public static String reverse(String string) {
+		StringBuilder build = new StringBuilder(string.length()) ;
+		char[] cs = string.toCharArray();
+		
+		for (int i = cs.length-1 ; i>=0; i--) {
+			build.append(cs[i]);
+		}
+		
+		return build.toString();
+	}
+
 	
 	
 }

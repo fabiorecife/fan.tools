@@ -42,4 +42,10 @@ public class StringHelperTest {
 		assertEquals("17", StringHelper.formatarNumeroComZerosAEsquerda(17,2));
 	}
 
+	@Test
+	public void test_reverse() {
+		assertEquals("54321", StringHelper.reverse("12345"));
+		assertEquals("12345", StringHelper.reverse(StringHelper.reverse("12345")));
+	}
+	
 }
