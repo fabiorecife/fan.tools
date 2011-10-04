@@ -73,7 +73,6 @@ public class Principal extends Composite {
 	private AbsolutePanel panelStubUtil;
 	private Label lblStringUtil;
 	private Label lblStubUtil;
-	private Hyperlink hprlnkTese;
 
 	public Principal() {
 		
@@ -143,14 +142,6 @@ public class Principal extends Composite {
 		stubButton.setText("Stub Util");
 		flowPanel.add(stubButton);
 		stubButton.setWidth("145px");
-		
-		hprlnkTese = new Hyperlink("testte", false, "newHistoryToken");
-		hprlnkTese.addAttachHandler(new Handler() {
-			public void onAttachOrDetach(AttachEvent event) {
-			}
-		});
-		hprlnkTese.setHTML("teste");
-		flowPanel.add(hprlnkTese);
 		
 		panelCentro = new AbsolutePanel();
 		dockPanel.add(panelCentro, DockPanel.CENTER);
