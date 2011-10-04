@@ -62,6 +62,7 @@ public class Principal extends Composite {
 	private Label respostaCnpjLabel;
 	private TextBox cnpjGeradoTextBox;
 	private CheckBox formatadoCheckBox;
+	private CheckBox formatadoCpfCheckBox;
 
 	public Principal() {
 		
@@ -153,7 +154,13 @@ public class Principal extends Composite {
 		gerarCpfButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				NumeroCpf cpf = new NumeroCpf();
-				cpfGeradoTextBox.setText(cpf.toString());
+				if(formatadoCpfCheckBox.getValue()) {
+					cpfGeradoTextBox.setText(cpf.formatado());
+					
+				} else {
+					cpfGeradoTextBox.setText(cpf.toString());
+					
+				}
 			}
 		});
 		panelGeradores.add(gerarCpfButton, 28, 108);
@@ -210,6 +217,9 @@ public class Principal extends Composite {
 		
 		formatadoCheckBox = new CheckBox("Formatado");
 		panelGeradores.add(formatadoCheckBox, 133, 242);
+		
+		formatadoCpfCheckBox = new CheckBox("Formatado");
+		panelGeradores.add(formatadoCpfCheckBox, 133, 137);
 		deckPanel.showWidget(0);
 	}
 }

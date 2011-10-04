@@ -25,17 +25,20 @@ public class NumeroCpf  {
 	private String numero;
 	private Modulo11 modulo11;
 	private DigitoVerificador digitoVerificador;
+	private String numeroFormatado;
 	
 	public NumeroCpf(String numero) {
 		modulo11 = new Modulo11(2,11);
 		digitoVerificador = new DigitoVerificador(2,modulo11);
 		this.numero = StringHelper.pegarApenasNumeros(numero);
+		formateNumero();
 	}
 	
 	public NumeroCpf() {
 		modulo11 = new Modulo11(2,11);
 		digitoVerificador = new DigitoVerificador(2,modulo11);
 		completarComNumeroAleatorio();
+		formateNumero();
 	}
 	
 	public void completarComNumeroAleatorio() {
@@ -92,5 +95,23 @@ public class NumeroCpf  {
 		return numero;
 	}
 	
+	
+	private void formateNumero() {
+		StringBuilder build = new StringBuilder();
+		build.append(numero.substring(0, 3));
+		build.append('.');
+		build.append(numero.substring(3, 6));
+		build.append('.');
+		build.append(numero.substring(6, 9));
+		build.append('-');
+		build.append(numero.substring(9, 11));
+		
+		this.numeroFormatado = build.toString();
+	}
+
+	public String formatado() {
+		return this.numeroFormatado;
+	}
+
 	
 }

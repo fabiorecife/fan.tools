@@ -46,10 +46,10 @@ public class NumeroCpfTest {
 	
 	@Test
 	public void test_formatado() {
-		NumeroCnpj cnpj = new NumeroCnpj();
-		assertTrue(cnpj.formatado().charAt(3) == '.');
-		assertTrue(cnpj.formatado().charAt(7) == '.');
-		assertTrue(cnpj.formatado().charAt(11) == '-');
+		NumeroCpf cpf = new NumeroCpf();
+		assertTrue(cpf.formatado().charAt(3) == '.');
+		assertTrue(cpf.formatado().charAt(7) == '.');
+		assertTrue(cpf.formatado().charAt(11) == '-');
 	}
 	
 }

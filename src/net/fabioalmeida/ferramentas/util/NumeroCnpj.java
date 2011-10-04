@@ -35,13 +35,15 @@ public class NumeroCnpj  {
 
 	private void formateNumero() {
 		StringBuilder build = new StringBuilder();
-		build.append(numero.substring(0, 3));
+		build.append(numero.substring(0, 2));
 		build.append('.');
-		build.append(numero.substring(3, 6));
+		build.append(numero.substring(2, 5));
 		build.append('.');
-		build.append(numero.substring(6, 9));
+		build.append(numero.substring(5, 8));
+		build.append('/');
+		build.append(numero.substring(8, 12));
 		build.append('-');
-		build.append(numero.substring(9, 11));
+		build.append(numero.substring(12, 14));
 		
 		this.numeroFormatado = build.toString();
 	}
