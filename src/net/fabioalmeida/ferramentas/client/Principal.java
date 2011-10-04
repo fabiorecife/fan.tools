@@ -36,6 +36,10 @@ import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.event.logical.shared.AttachEvent.Handler;
+import com.google.gwt.event.logical.shared.AttachEvent;
 
 public class Principal extends Composite {
 	private Label lblNewLabel;
@@ -44,7 +48,6 @@ public class Principal extends Composite {
 	private AbsolutePanel panelMenuEsquerdo;
 	private DeckPanel deckPanel;
 	private StackPanel stackPanel;
-	private VerticalPanel verticalPanel;
 	private Button geraCpfButton;
 	private AbsolutePanel panelGeradores;
 	private TextBox cpfParaValidarTextBox;
@@ -63,6 +66,14 @@ public class Principal extends Composite {
 	private TextBox cnpjGeradoTextBox;
 	private CheckBox formatadoCheckBox;
 	private CheckBox formatadoCpfCheckBox;
+	private AbsolutePanel panelStringUtil;
+	private Button stringUtilButton;
+	private Button stubButton;
+	private FlowPanel flowPanel;
+	private AbsolutePanel panelStubUtil;
+	private Label lblStringUtil;
+	private Label lblStubUtil;
+	private Hyperlink hprlnkTese;
 
 	public Principal() {
 		
@@ -99,16 +110,47 @@ public class Principal extends Composite {
 		panelMenuEsquerdo.add(stackPanel, 0, 0);
 		stackPanel.setSize("156px", "908px");
 		
-		verticalPanel = new VerticalPanel();
-		verticalPanel.setStyleName("body");
-		stackPanel.add(verticalPanel, "Ferramentas", false);
-		verticalPanel.setSize("100%", "100%");
+		flowPanel = new FlowPanel();
+		stackPanel.add(flowPanel, "Ferramentas", false);
+		flowPanel.setSize("100%", "100%");
 		
 		geraCpfButton = new Button("Gerador CPF");
+		flowPanel.add(geraCpfButton);
+		geraCpfButton.setWidth("145px");
+		geraCpfButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				deckPanel.showWidget(0);
+			}
+		});
 		geraCpfButton.setText("CPF / CNPJ");
-		verticalPanel.add(geraCpfButton);
-		geraCpfButton.setWidth("100%");
-		verticalPanel.setCellHorizontalAlignment(geraCpfButton, HasHorizontalAlignment.ALIGN_CENTER);
+		
+		stringUtilButton = new Button("New button");
+		stringUtilButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				deckPanel.showWidget(1);
+			}
+		});
+		flowPanel.add(stringUtilButton);
+		stringUtilButton.setText("String Util");
+		stringUtilButton.setWidth("145px");
+		
+		stubButton = new Button("New button");
+		stubButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				deckPanel.showWidget(2);
+			}
+		});
+		stubButton.setText("Stub Util");
+		flowPanel.add(stubButton);
+		stubButton.setWidth("145px");
+		
+		hprlnkTese = new Hyperlink("testte", false, "newHistoryToken");
+		hprlnkTese.addAttachHandler(new Handler() {
+			public void onAttachOrDetach(AttachEvent event) {
+			}
+		});
+		hprlnkTese.setHTML("teste");
+		flowPanel.add(hprlnkTese);
 		
 		panelCentro = new AbsolutePanel();
 		dockPanel.add(panelCentro, DockPanel.CENTER);
@@ -220,6 +262,24 @@ public class Principal extends Composite {
 		
 		formatadoCpfCheckBox = new CheckBox("Formatado");
 		panelGeradores.add(formatadoCpfCheckBox, 133, 137);
+		
+		panelStringUtil = new AbsolutePanel();
+		deckPanel.add(panelStringUtil);
+		
+		lblStringUtil = new Label("String Util");
+		lblStringUtil.setStyleName("fan-label-titulo");
+		lblStringUtil.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+		panelStringUtil.add(lblStringUtil, 10, 10);
+		lblStringUtil.setSize("770px", "19px");
+		
+		panelStubUtil = new AbsolutePanel();
+		deckPanel.add(panelStubUtil);
+		
+		lblStubUtil = new Label("Stub Util");
+		lblStubUtil.setStyleName("fan-label-titulo");
+		lblStubUtil.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+		panelStubUtil.add(lblStubUtil, 10, 10);
+		lblStubUtil.setSize("770px", "19px");
 		deckPanel.showWidget(0);
 	}
 }
