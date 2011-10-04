@@ -75,5 +75,12 @@ public class NumeroCnpjTest {
 		assertTrue(cnpj.valido());
 	}
 	
-	
+	@Test
+	public void test_formatado() {
+		NumeroCnpj cnpj = new NumeroCnpj();
+		assertTrue(cnpj.formatado().charAt(2) == '.');
+		assertEquals('.',cnpj.formatado().charAt(6));
+		assertTrue(cnpj.formatado().charAt(10) == '/');
+		assertTrue(cnpj.formatado().charAt(15) == '-');
+	}
 }

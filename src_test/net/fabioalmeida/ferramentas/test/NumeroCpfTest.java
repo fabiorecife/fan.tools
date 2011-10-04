@@ -2,6 +2,7 @@ package net.fabioalmeida.ferramentas.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import net.fabioalmeida.ferramentas.util.NumeroCnpj;
 import net.fabioalmeida.ferramentas.util.NumeroCpf;
 
 import org.junit.Test;
@@ -41,6 +42,14 @@ public class NumeroCpfTest {
 	public void test_geracaoAutomatica() {
 		NumeroCpf cpf = new NumeroCpf();
 		assertTrue(cpf.valido());
+	}
+	
+	@Test
+	public void test_formatado() {
+		NumeroCnpj cnpj = new NumeroCnpj();
+		assertTrue(cnpj.formatado().charAt(3) == '.');
+		assertTrue(cnpj.formatado().charAt(7) == '.');
+		assertTrue(cnpj.formatado().charAt(11) == '-');
 	}
 	
 }

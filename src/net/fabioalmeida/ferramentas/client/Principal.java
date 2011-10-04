@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.CheckBox;
 
 public class Principal extends Composite {
 	private Label lblNewLabel;
@@ -60,6 +61,7 @@ public class Principal extends Composite {
 	private TextBox cnpjValidarTextBox;
 	private Label respostaCnpjLabel;
 	private TextBox cnpjGeradoTextBox;
+	private CheckBox formatadoCheckBox;
 
 	public Principal() {
 		
@@ -184,7 +186,12 @@ public class Principal extends Composite {
 		gerarCnpjButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				NumeroCnpj cnpj = new NumeroCnpj();
-				String scnpj = cnpj.toString();
+				String scnpj = null;
+				if (formatadoCheckBox.getValue()) {
+					scnpj = cnpj.formatado();
+				} else {
+					scnpj = cnpj.toString();
+				}
 				cnpjGeradoTextBox.setText(scnpj);
 			}
 		});
@@ -200,6 +207,9 @@ public class Principal extends Composite {
 		
 		cnpjGeradoTextBox = new TextBox();
 		panelGeradores.add(cnpjGeradoTextBox, 133, 209);
+		
+		formatadoCheckBox = new CheckBox("Formatado");
+		panelGeradores.add(formatadoCheckBox, 133, 242);
 		deckPanel.showWidget(0);
 	}
 }

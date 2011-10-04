@@ -23,17 +23,35 @@ public class NumeroCnpj  {
 
 	private static final int TAMANHO_CNPJ = 14;
 	private String numero;
+	private String numeroFormatado;
 	private Modulo11 modulo11;
 	private DigitoVerificador digitoVerificador;
 
 	public NumeroCnpj(String numero) {
 		initInternal();
 		this.numero = StringHelper.pegarApenasNumeros(numero);
+		if (tamanhoValido()) formateNumero();
+	}
+
+	private void formateNumero() {
+		StringBuilder build = new StringBuilder();
+		build.append(numero.substring(0, 2));
+		build.append('.');
+		build.append(numero.substring(2, 5));
+		build.append('.');
+		build.append(numero.substring(5, 8));
+		build.append('/');
+		build.append(numero.substring(8, 12));
+		build.append('-');
+		build.append(numero.substring(12, 14));
+		
+		this.numeroFormatado = build.toString();
 	}
 
 	public NumeroCnpj () {
 		initInternal();
 		completarComNumeroAleatorio();
+		formateNumero();
 	}
 
 	private void initInternal() {
@@ -48,8 +66,12 @@ public class NumeroCnpj  {
 	}
 	
 	public boolean valido() {
-		if (numero == null || numero.length() != TAMANHO_CNPJ) return false;
+		if (!tamanhoValido()) return false;
 		return getDigitoVerificador() == digitoVerificador.calcular(getNumeroSemDigito());
+	}
+
+	private boolean tamanhoValido() {
+		return numero != null && numero.length() == TAMANHO_CNPJ;
 	}
 	
 	public long[] getNumeroSemDigito() {
@@ -88,6 +110,10 @@ public class NumeroCnpj  {
 		} else if (!numero.equals(other.numero))
 			return false;
 		return true;
+	}
+
+	public String formatado() {
+		return this.numeroFormatado;
 	}
 
 	
