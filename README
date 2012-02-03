@@ -1,11 +1,11 @@
 fan.tools 
 
 Small Tools:
-    cpf generator - OK
-    cpf validator - OK
-    cpf formatador - OK
-    cnpj generator - OK
-    cnpj validator - OK
+    cpf generator   - OK
+    cpf validator   - OK
+    cpf formatador  - OK
+    cnpj generator  - OK
+    cnpj validator  - OK
     cnpj formatador - OK
     gwt stub generator
     String reverse
