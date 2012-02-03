@@ -1,19 +1,18 @@
 /*
  *	fan.tools - small tools in java/gwt 
- *	Copyright (C) 2011  Fábio Almeida (http://fabioalmeida.net)
+ *	Copyright (C) 2011  Fabio Almeida (http://fabioalmeida.net)
  *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *  
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package net.fabioalmeida.ferramentas.client;
@@ -22,8 +21,10 @@ package net.fabioalmeida.ferramentas.client;
 import net.fabioalmeida.ferramentas.util.NumeroCnpj;
 import net.fabioalmeida.ferramentas.util.NumeroCpf;
 
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -40,6 +41,9 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.event.logical.shared.AttachEvent.Handler;
 import com.google.gwt.event.logical.shared.AttachEvent;
+import com.google.gwt.user.client.ui.ToggleButton;
+import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.user.client.ui.ListBox;
 
 public class Principal extends Composite {
 	private Label lblNewLabel;
@@ -73,6 +77,13 @@ public class Principal extends Composite {
 	private AbsolutePanel panelStubUtil;
 	private Label lblStringUtil;
 	private Label lblStubUtil;
+	private Button btnTeste;
+	private Label lblLabel;
+	private TextBox textBox;
+	private ToggleButton tglbtnTeste;
+	private CheckBox chckbxNewCheckBox;
+	private DateBox dateBox;
+	private ListBox listBox;
 
 	public Principal() {
 		
@@ -113,33 +124,29 @@ public class Principal extends Composite {
 		stackPanel.add(flowPanel, "Ferramentas", false);
 		flowPanel.setSize("100%", "100%");
 		
-		geraCpfButton = new Button("Gerador CPF");
+		geraCpfButton = FanFactory.createButtonMenu("CPF / CNPJ");
 		flowPanel.add(geraCpfButton);
-		geraCpfButton.setWidth("145px");
 		geraCpfButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				deckPanel.showWidget(0);
 			}
 		});
-		geraCpfButton.setText("CPF / CNPJ");
 		
-		stringUtilButton = new Button("New button");
+		stringUtilButton = FanFactory.createButtonMenu("String Util");
 		stringUtilButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				deckPanel.showWidget(1);
 			}
 		});
 		flowPanel.add(stringUtilButton);
-		stringUtilButton.setText("String Util");
 		stringUtilButton.setWidth("145px");
 		
-		stubButton = new Button("New button");
+		stubButton = FanFactory.createButtonMenu("Stub Util");
 		stubButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				deckPanel.showWidget(2);
 			}
 		});
-		stubButton.setText("Stub Util");
 		flowPanel.add(stubButton);
 		stubButton.setWidth("145px");
 		
@@ -148,6 +155,7 @@ public class Principal extends Composite {
 		panelCentro.setSize("790px", "910px");
 		
 		deckPanel = new DeckPanel();
+		deckPanel.setAnimationEnabled(true);
 		panelCentro.add(deckPanel);
 		deckPanel.setStyleName("fan-deckPanel-centro");
 		deckPanel.setSize("790px", "100%");
@@ -246,6 +254,7 @@ public class Principal extends Composite {
 		panelGeradores.add(respostaCnpjLabel, 319, 167);
 		
 		cnpjGeradoTextBox = new TextBox();
+		cnpjGeradoTextBox.setName("cnpjgerado");
 		panelGeradores.add(cnpjGeradoTextBox, 133, 209);
 		
 		formatadoCheckBox = new CheckBox("Formatado");
@@ -253,6 +262,10 @@ public class Principal extends Composite {
 		
 		formatadoCpfCheckBox = new CheckBox("Formatado");
 		panelGeradores.add(formatadoCpfCheckBox, 133, 137);
+		
+		btnTeste = FanFactory.createButtonMenu("CPF / CNPJ");
+		btnTeste.setHTML("Teste");
+		panelGeradores.add(btnTeste, 28, 314);
 		
 		panelStringUtil = new AbsolutePanel();
 		deckPanel.add(panelStringUtil);
@@ -271,6 +284,28 @@ public class Principal extends Composite {
 		lblStubUtil.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
 		panelStubUtil.add(lblStubUtil, 10, 10);
 		lblStubUtil.setSize("770px", "19px");
-		deckPanel.showWidget(0);
+		
+		lblLabel = new Label("Label");
+		panelStubUtil.add(lblLabel, 54, 99);
+		
+		textBox = new TextBox();
+		textBox.setName("meutextbox");
+		panelStubUtil.add(textBox, 54, 133);
+		
+		tglbtnTeste = new ToggleButton("teste");
+		panelStubUtil.add(tglbtnTeste, 54, 196);
+		
+		chckbxNewCheckBox = new CheckBox("New check box");
+		panelStubUtil.add(chckbxNewCheckBox, 57, 238);
+		
+		dateBox = new DateBox();
+		panelStubUtil.add(dateBox, 54, 297);
+		
+		DOM.setElementProperty(dateBox.getElement(), "myid", "datebox");
+		
+		listBox = new ListBox();
+		panelStubUtil.add(listBox, 114, 356);
+		listBox.setVisibleItemCount(5);
+		deckPanel.showWidget(2);
 	}
 }

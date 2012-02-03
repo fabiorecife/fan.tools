@@ -1,7 +1,5 @@
 fan.tools 
 
-License: GPLv3
-
 Small Tools:
     cpf generator - OK
     cpf validator - OK
@@ -14,3 +12,6 @@ Small Tools:
 
 To compile:
   add war/lib/gwt-servlet.jar
+
+License: 
+	Apache License, Version 2.0
